@@ -1,6 +1,7 @@
 import { useEffect, useRef } from 'react';
 import { useThree } from '@react-three/fiber';
 import GUI from 'lil-gui';
+import type { RoomType } from '../types';
 import { useGameStore } from '../hooks/useGameStore';
 import { PLAYER_CONFIG, PHYSICS_CONFIG } from '../config/rooms';
 
@@ -83,13 +84,13 @@ export function DebugGUI() {
     cameraFolder.close();
 
     const roomFolder = gui.addFolder('Rooms');
-    const roomOptions = {
+    const roomOptions: { room: RoomType } = {
       room: currentRoom,
     };
     roomFolder.add(roomOptions, 'room', ['main', 'minigame1', 'minigame2', 'minigame3', 'minigame4'])
       .name('Current Room')
-      .onChange((value: string) => {
-        setCurrentRoom(value as any);
+      .onChange((value: RoomType) => {
+        setCurrentRoom(value);
       });
     roomFolder.close();
 
